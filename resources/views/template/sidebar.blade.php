@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 mb-3" href="/">
         <div class="sidebar-brand-icon">
-            <img src="/assets/img/logo_uks.png" width="100">
+            <!-- <img src="/assets/img/logo_uks.png" width="100"> -->
             {{-- <i class="fas fa-laugh-wink"></i> --}}
         </div>
         {{-- <div class="sidebar-brand-text mx-3">UKS</div> --}}
@@ -24,27 +24,21 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" href="/siswa">
+        <a class="nav-link" href="/stok">
             <i class="fas fa-fw fa-user o"></i>
-            <span>Siswa</span>
+            <span>Stok Kendaraan</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/guru">
+        <a class="nav-link" href="/penjualan">
             <i class="fas fa-fw fa-user o"></i>
-            <span>Guru</span>
+            <span>Penjualan Kendaraan</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/karyawan">
             <i class="fas fa-fw fa-user o"></i>
-            <span>Karyawan</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/riwayat">
-            <i class="fas fa-solid fa-pills"></i>
-            <span>Riwayat</span>
+            <span>Laporan Penjualan</span>
         </a>
     </li>
     {{-- <li class="nav-item">

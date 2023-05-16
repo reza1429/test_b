@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [KendaraanController::class, 'index']);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('', function () {
+    return view('dashboard');
+});
+Route::get('dashboard', function () {
+    return view('dashboard');
+});
+Route::get('stok', [KendaraanController::class, 'index']);
+Route::get('penjualan', [KendaraanController::class, 'penjualan']);
+Route::get('stok/{id}/updatemotor', [KendaraanController::class, 'updatemotor'])->name('stok.updatemotor');
+Route::get('stok/{id}/updatemobil', [KendaraanController::class, 'updatemobil'])->name('stok.updatemobil');

@@ -8,11 +8,11 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Mobil extends Model
 {
     protected $collection = 'mobil';
-    protected $fillable = ['mesin', 'kapasitas_penumpang', 'tipe'];
+    protected $fillable = ['mesin', 'kapasitas_penumpang', 'tipe', 'status'];
 
     public function kendaraan()
     {
-        return $this->hasOne(Kendaraan::class);
+        return $this->belongsTo(Kendaraan::class);
     }
     use HasFactory;
 }

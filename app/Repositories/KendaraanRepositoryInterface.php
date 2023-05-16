@@ -2,15 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\Kendaraan;
+use Illuminate\Support\Collection;
 
 interface KendaraanRepositoryInterface
 {
-    public function getStokKendaraan(): array;
+    public function getStokKendaraan(): Collection;
 
-    public function createKendaraan(array $data): Kendaraan;
+    public function createKendaraan(array $data): bool;
 
-    public function getPenjualanKendaraan(): array;
+    public function getPenjualanKendaraan(): Collection;
 
-    public function getLaporanPenjualanKendaraan(string $kendaraanId): array;
+    public function getLaporanPenjualanKendaraan(): Collection;
 }

@@ -20,6 +20,7 @@ class CreateMobilsTable extends Migration
             $collection->string('mesin');
             $collection->integer('kapasitas_penumpang');
             $collection->string('tipe');
+            $collection->integer('status');
         });
     }
 

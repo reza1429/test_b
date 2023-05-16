@@ -12,7 +12,8 @@ class Motor extends Model
     protected $fillable = [
         'mesin',
         'tipe_suspensi',
-        'tipe_transmisi'
+        'tipe_transmisi',
+        'status'
     ];
 
     public function kendaraan()

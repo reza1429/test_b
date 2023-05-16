@@ -19,6 +19,7 @@ class CreateMotorsTable extends Migration
             $collection->string('mesin');
             $collection->string('tipe_suspensi');
             $collection->string('tipe_transmisi');
+            $collection->integer('status');
             $collection->timestamps();
         });
     }
