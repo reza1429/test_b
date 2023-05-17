@@ -21,9 +21,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('kendaraan/stok', [KendaraanController::class, 'getStokKendaraan']);
-    Route::post('kendaraan', [KendaraanController::class, 'createKendaraan']);
     Route::get('kendaraan/penjualan', [KendaraanController::class, 'getPenjualanKendaraan']);
-    Route::get('kendaraan/laporan', [KendaraanController::class, 'getLaporanPenjualanKendaraan']);
 });
 
 

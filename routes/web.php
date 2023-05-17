@@ -24,3 +24,6 @@ Route::get('stok', [KendaraanController::class, 'index']);
 Route::get('penjualan', [KendaraanController::class, 'penjualan']);
 Route::get('stok/{id}/updatemotor', [KendaraanController::class, 'updatemotor'])->name('stok.updatemotor');
 Route::get('stok/{id}/updatemobil', [KendaraanController::class, 'updatemobil'])->name('stok.updatemobil');
+
+Route::get('test', [KendaraanController::class, 'getStokKendaraan']);
+Route::get('test2', [KendaraanController::class, 'getPenjualanKendaraan']);

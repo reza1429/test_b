@@ -2,6 +2,73 @@
  
 @section('title', 'Penjualan')
 @section('content')
+
+{{-- modal laporan motor --}}
+@foreach ($motor as $lmotor)
+<div class="modal fade" id="modal-lmotor{{$lmotor->id}}">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Laporan Keuangan Motor</h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body table-responsive">
+            <table class="table table-borderless">
+            <tr>
+                <td>Mesin : {{$lmotor->mesin}}</td>
+                <td>Tahun Keluaran : {{$lmotor->kendaraan->tahun_keluaran}}</td>
+            </tr>
+            <tr>
+                <td>Tipe Suspensi : {{$lmotor->tipe_suspensi}}</td>
+                <td>Warna : {{$lmotor->kendaraan->warna}}</td>
+            </tr>
+            <tr>
+                <td>Tipe Transmisi : {{$lmotor->tipe_transmisi}}</td>
+                <td>Harga : {{$lmotor->kendaraan->harga}}</td>
+            </tr>
+            <tr>
+                <td>Waktu Pembelian : {{Carbon\Carbon::parse($lmotor->updated_at)->format('l, j F Y H:i') ?? '' }}</td>
+            </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+{{-- modal laporan mobil --}}
+@foreach ($mobil as $lmobil)
+<div class="modal fade" id="modal-lmobil{{$lmobil->id}}">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Laporan Keuangan Mobil</h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body table-responsive">
+            <table class="table table-borderless">
+            <tr>
+                <td>Mesin : {{$lmobil->mesin}}</td>
+                <td>Tahun Keluaran : {{$lmobil->kendaraan->tahun_keluaran}}</td>
+            </tr>
+            <tr>
+                <td>Kapasitas Penumpang : {{$lmobil->kapasitas_penumpang}}</td>
+                <td>Warna : {{$lmobil->kendaraan->warna}}</td>
+            </tr>
+            <tr>
+                <td>Tipe Mobil : {{$lmobil->tipe}}</td>
+                <td>Harga : {{$lmobil->kendaraan->harga}}</td>
+            </tr>
+            <tr>
+                <td>Waktu Pembelian : {{Carbon\Carbon::parse($lmobil->updated_at)->format('l, j F Y H:i') ?? '' }}</td>
+            </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 <div>
     <h1>Penjualan Kendaraan</h1>
 
@@ -19,7 +86,7 @@
                             <th>Mesin</th>
                             <th>Tipe Suspensi</th>
                             <th>Tipe Transmisi</th>
-                            <th>Tanggal Keluaran</th>
+                            <th>Tahun Keluaran</th>
                             <th>Warna</th>
                             <th>Harga</th>
                             <th>Action</th>
@@ -36,7 +103,9 @@
                             <td>{{$item->kendaraan->warna}}</td>
                             <td>{{$item->kendaraan->harga}}</td>
                             <td>
-                                <a href="{{ route('stok.updatemotor', $item->id)  }}" class="btn btn-sm btn-outline-primary">Laporan Motor</a>
+                                 <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#modal-lmotor{{$item->id}}">
+                                    <i class="fa fa-info" aria-hidden="true"></i> Detail
+                                </button>
                             </td>
                         </tr>
                         @endforeach
@@ -59,7 +128,7 @@
                             <th>Mesin</th>
                             <th>Kapasitas Penumpang</th>
                             <th>Tipe</th>
-                            <th>Tanggal Keluaran</th>
+                            <th>Tahun Keluaran</th>
                             <th>Warna</th>
                             <th>Harga</th>
                             <th>Action</th>
@@ -76,7 +145,9 @@
                             <td>{{$mobil->kendaraan->warna}}</td>
                             <td>{{$mobil->kendaraan->harga}}</td>
                             <td>
-                            <a href="{{ route('stok.updatemobil', $mobil->id)  }}" class="btn btn-sm btn-outline-primary">Laporan Mobil</a>
+                                <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#modal-lmobil{{$mobil->id}}">
+                                   <i class="fa fa-info" aria-hidden="true"></i> Detail
+                               </button>
                             </td>
                         </tr>
                         @endforeach

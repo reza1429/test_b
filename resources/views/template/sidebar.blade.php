@@ -35,12 +35,12 @@
             <span>Penjualan Kendaraan</span>
         </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="/karyawan">
             <i class="fas fa-fw fa-user o"></i>
             <span>Laporan Penjualan</span>
         </a>
-    </li>
+    </li> -->
     {{-- <li class="nav-item">
         <a class="nav-link" href="/obat">
             <i class="fas fa-solid fa-pills"></i>

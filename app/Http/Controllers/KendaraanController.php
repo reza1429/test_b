@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-// use App\Services\KendaraanServiceInterface;
-// use App\Repositories\KendaraanRepositoryInterface;
+use App\Services\KendaraanServiceInterface;
+use App\Repositories\KendaraanRepositoryInterface;
 use App\Models\Kendaraan;
 use App\Models\Motor;
 use App\Models\Mobil;
+use Carbon\Carbon;
 use DB;
+use Exception;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -19,74 +21,41 @@ class KendaraanController extends Controller
      */
 
      
-    // protected $kendaraanService;
-    // protected $kendaraanRepository;
+    protected $kendaraanService;
+    protected $kendaraanRepository;
 
-    // public function __construct(KendaraanServiceInterface $kendaraanService, KendaraanRepositoryInterface $kendaraanRepository)
-    // {
-    //     $this->kendaraanService = $kendaraanService;
-    //     $this->kendaraanRepository = $kendaraanRepository;
-    // }
+    public function __construct(KendaraanServiceInterface $kendaraanService, KendaraanRepositoryInterface $kendaraanRepository)
+    {
+        $this->kendaraanService = $kendaraanService;
+        $this->kendaraanRepository = $kendaraanRepository;
+    }
 
-    // public function getStokKendaraan()
-    // {
-    //     $stokKendaraan = $this->kendaraanService->getStokKendaraan();
+    public function getStokKendaraan()
+    {
+        $stokKendaraan = $this->kendaraanService->getStokKendaraan();
 
-    //     return response()->json([
-    //         'success' => true,
-    //         'data' => $stokKendaraan
-    //     ]);
-    // }
+        return response()->json([
+            'success' => true,
+            'data' => $stokKendaraan
+        ]);
+    }
 
-    // public function createKendaraan(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'tahun_keluaran' => 'required',
-    //         'warna' => 'required',
-    //         'harga' => 'required'
-    //     ]);
+    public function getPenjualanKendaraan()
+    {
+        $penjualanKendaraan = $this->kendaraanService->getPenjualanKendaraan();
 
-    //     $kendaraan = $this->kendaraanService->createKendaraan($request->all());
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'data' => $kendaraan
-    //     ], 201);
-    // }
-
-    // public function getPenjualanKendaraan()
-    // {
-    //     $penjualanKendaraan = $this->kendaraanService->getPenjualanKendaraan();
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'data' => $penjualanKendaraan
-    //     ]);
-    // }
-
-    // public function getLaporanPenjualanKendaraan(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'kendaraan_id' => 'required'
-    //     ]);
-
-    //     $laporanPenjualan = $this->kendaraanService->getLaporanPenjualanKendaraan($request->kendaraan_id);
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'data' => $laporanPenjualan
-    //     ]);
-    // }
+        return response()->json([
+            'success' => true,
+            'data' => $penjualanKendaraan
+        ]);
+    }
 
     public function index()
     {
-        // $motor = Motor::all();
         $motor = Motor::where('status', 0)->with('kendaraan')->get();
         $mobil = Mobil::where('status', 0)->with('kendaraan')->get();
         
         return view('stok_kendaraan', compact('motor', 'mobil'));
-
-        //
     }
 
     /**
@@ -96,8 +65,8 @@ class KendaraanController extends Controller
      */
 
     public function penjualan(){
-        $motor = Motor::where('status', 1)->with('kendaraan')->get();
-        $mobil = Mobil::where('status', 1)->with('kendaraan')->get();
+        $motor = Motor::where('status', 1)->with('kendaraan')->orderBy('updated_at', 'asc')->get();
+        $mobil = Mobil::where('status', 1)->with('kendaraan')->orderBy('updated_at', 'asc')->get();
         
         return view('penjualan_kendaraan', compact('motor', 'mobil'));
     }
@@ -150,19 +119,21 @@ class KendaraanController extends Controller
     {
         $motor = Motor::find($id);
         $motor->status = 1;
-
+        $motor->updated_at = Carbon::now()->translatedFormat('Y-m-d H:i:s');
+        
         $motor->save();
-        return redirect('stok');
+        return redirect('penjualan');
         //
     }
-
+    
     public function updatemobil(Request $request, $id)
     {
         $mobil = Mobil::find($id);
         $mobil->status = 1;
+        $mobil->updated_at = Carbon::now()->translatedFormat('Y-m-d H:i:s');
 
         $mobil->save();
-        return redirect('stok');
+        return redirect('penjualan');
         //
     }
 
